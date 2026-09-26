@@ -48,59 +48,59 @@ font-size:18px;
 
 .cards{
 display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:22px;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
 }
 
 .card{
 background:linear-gradient(145deg,#111d30,#0d1727);
 border:1px solid #26364d;
 border-radius:25px;
-padding:28px;
+padding:24px;
 box-shadow:0 20px 50px rgba(0,0,0,.3);
 }
 
 .card h2{
-font-size:28px;
+font-size:23px;
 margin:0;
 }
 
 .date{
 color:#94a3b8;
-margin:8px 0 25px;
+margin:8px 0 20px;
 }
 
 .timer{
 display:grid;
-grid-template-columns:repeat(4,1fr);
+grid-template-columns:repeat(2,1fr);
 gap:9px;
 }
 
 .unit{
 background:#08111f;
 border-radius:15px;
-padding:15px 5px;
+padding:13px 5px;
 text-align:center;
 }
 
 .num{
-font-size:38px;
+font-size:30px;
 font-weight:bold;
 }
 
 .label{
-font-size:11px;
+font-size:10px;
 color:#8291a7;
 margin-top:5px;
 }
 
 .note{
-margin-top:18px;
-padding:12px;
+margin-top:16px;
+padding:11px;
 border-radius:12px;
 background:#172235;
 color:#aebbd0;
-font-size:13px;
+font-size:12px;
 }
 
 footer{
@@ -110,7 +110,7 @@ margin-top:35px;
 font-size:13px;
 }
 
-@media(max-width:720px){
+@media(max-width:850px){
 .cards{grid-template-columns:1fr}
 .card{padding:22px}
 .num{font-size:30px}
@@ -124,71 +124,52 @@ font-size:13px;
 
 <header>
 <div class="badge">📚 Sınav Takip</div>
-
 <h1>Sınava Ne Kadar Kaldı?</h1>
-
 <p>KPSS ve YKS sınavlarını tek ekrandan takip et.</p>
 </header>
 
 <section class="cards">
 
 <div class="card">
-
-<h2>KPSS Ortaöğretim 2026</h2>
-
-<div class="date">25 Ekim 2026</div>
+<h2>KPSS Ön Lisans 2026</h2>
+<div class="date">4 Ekim 2026 • 10:15</div>
 
 <div class="timer">
-
-<div class="unit">
-<div class="num" id="days">--</div>
-<div class="label">GÜN</div>
+<div class="unit"><div class="num" id="onlisans-days">--</div><div class="label">GÜN</div></div>
+<div class="unit"><div class="num" id="onlisans-hours">--</div><div class="label">SAAT</div></div>
+<div class="unit"><div class="num" id="onlisans-minutes">--</div><div class="label">DAKİKA</div></div>
+<div class="unit"><div class="num" id="onlisans-seconds">--</div><div class="label">SANİYE</div></div>
 </div>
 
-<div class="unit">
-<div class="num" id="hours">--</div>
-<div class="label">SAAT</div>
-</div>
-
-<div class="unit">
-<div class="num" id="minutes">--</div>
-<div class="label">DAKİKA</div>
-</div>
-
-<div class="unit">
-<div class="num" id="seconds">--</div>
-<div class="label">SANİYE</div>
-</div>
-
-</div>
-
-<div class="note">
-Sınav tarihine kalan süre canlı olarak hesaplanıyor.
-</div>
-
+<div class="note">Sınava kalan süre canlı olarak hesaplanıyor.</div>
 </div>
 
 <div class="card">
-
-<h2>YKS 2027</h2>
-
-<div class="date">
-ÖSYM tarihi açıklandığında güncellenecek
-</div>
+<h2>KPSS Ortaöğretim 2026</h2>
+<div class="date">25 Ekim 2026 • 10:15</div>
 
 <div class="timer">
+<div class="unit"><div class="num" id="orta-days">--</div><div class="label">GÜN</div></div>
+<div class="unit"><div class="num" id="orta-hours">--</div><div class="label">SAAT</div></div>
+<div class="unit"><div class="num" id="orta-minutes">--</div><div class="label">DAKİKA</div></div>
+<div class="unit"><div class="num" id="orta-seconds">--</div><div class="label">SANİYE</div></div>
+</div>
 
+<div class="note">Sınava kalan süre canlı olarak hesaplanıyor.</div>
+</div>
+
+<div class="card">
+<h2>YKS 2027</h2>
+<div class="date">ÖSYM tarihi açıklandığında güncellenecek</div>
+
+<div class="timer">
 <div class="unit"><div class="num">—</div><div class="label">GÜN</div></div>
 <div class="unit"><div class="num">—</div><div class="label">SAAT</div></div>
 <div class="unit"><div class="num">—</div><div class="label">DAKİKA</div></div>
 <div class="unit"><div class="num">—</div><div class="label">SANİYE</div></div>
-
 </div>
 
-<div class="note">
-2027 YKS tarihi açıklandığında sayaç aktif hale getirilecek.
-</div>
-
+<div class="note">2027 YKS tarihi açıklandığında sayaç aktif hale getirilecek.</div>
 </div>
 
 </section>
@@ -201,38 +182,40 @@ Sınav tarihine kalan süre canlı olarak hesaplanıyor.
 
 <script>
 
-const hedef = new Date("2026-10-25T10:15:00+03:00");
+const sinavlar = [
+{
+tarih:"2026-10-04T10:15:00+03:00",
+prefix:"onlisans"
+},
+{
+tarih:"2026-10-25T10:15:00+03:00",
+prefix:"orta"
+}
+];
 
-function sayac(){
+function sayac(sinav){
 
-const fark = Math.max(0, hedef - new Date());
+const hedef = new Date(sinav.tarih);
+const fark = Math.max(0,hedef-new Date());
+const toplam = Math.floor(fark/1000);
 
-const toplam = Math.floor(fark / 1000);
+const gun = Math.floor(toplam/86400);
+const saat = Math.floor((toplam%86400)/3600);
+const dakika = Math.floor((toplam%3600)/60);
+const saniye = toplam%60;
 
-const gun = Math.floor(toplam / 86400);
-
-const saat = Math.floor((toplam % 86400) / 3600);
-
-const dakika = Math.floor((toplam % 3600) / 60);
-
-const saniye = toplam % 60;
-
-document.getElementById("days").textContent = gun;
-
-document.getElementById("hours").textContent =
-String(saat).padStart(2,"0");
-
-document.getElementById("minutes").textContent =
-String(dakika).padStart(2,"0");
-
-document.getElementById("seconds").textContent =
-String(saniye).padStart(2,"0");
-
+document.getElementById(sinav.prefix+"-days").textContent=gun;
+document.getElementById(sinav.prefix+"-hours").textContent=String(saat).padStart(2,"0");
+document.getElementById(sinav.prefix+"-minutes").textContent=String(dakika).padStart(2,"0");
+document.getElementById(sinav.prefix+"-seconds").textContent=String(saniye).padStart(2,"0");
 }
 
-sayac();
+function tumSayaclar(){
+sinavlar.forEach(sayac);
+}
 
-setInterval(sayac,1000);
+tumSayaclar();
+setInterval(tumSayaclar,1000);
 
 </script>
 
